@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Holiday</title>
+    <link rel="stylesheet" type="text/css" href="css/Styles.css">
+</head>
+<body>
+    <h2>Update Holiday</h2>
+    <form action="/update" method="post">
+        <label for="day">Holiday Date:</label><br> 
+        <select id="day" name="day">
+            <#list 1..31 as dayNum>
+                <option value="${dayNum?string('00')}" 
+                        <#if dayNum?string('00') == day>${"selected"}</#if>>
+                    ${dayNum?string('00')}
+                </option>
+            </#list>
+        </select>
+
+        <select id="month" name="month">
+            <#list 1..12 as monthNum>
+                <#assign monthName = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']>
+                <option value="${monthNum?string('00')}" 
+                        <#if monthNum?string('00') == month>${"selected"}</#if>>
+                    ${monthName[monthNum]}
+                </option>
+            </#list>
+        </select>
+
+        <select id="year" name="year">
+            <option value="2024">2024</option>
+        </select>
+        <br> 
+        <label for="name">Holiday Name:</label> 
+        <input type="text" id="name" name="name" value="${entry.getName()}">
+        <br>
+        <input type="hidden" id="id" name="id" value="${entry.getId()}">
+        <div class="error-message">${errorMessage!}</div>
+        <button type="submit">Update Holiday</button>
+    </form>
+</body>
+</html>
